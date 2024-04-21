@@ -1,15 +1,16 @@
 {
-    "name": "osc",
+    "name": "malformed-osc",
     "main": "src/platforms/osc-node.js",
     "version": "2.4.4",
     "description": "A JavaScript Open Sound Control (OSC) library that works in Node.js and the browser.",
-    "author": "Colin Clark",
-    "homepage": "https://github.com/colinbdclark/osc.js",
+    "author": "Bronislav Růžička <brona.ruzicka@gmail.com>",
+    "contributors": [ "Colin Clark" ],
+    "homepage": "https://github.com/brona-ruzicka/malformed-osc.js",
     "repository": {
         "type": "git",
-        "url": "git://github.com/colinbdclark/osc.js.git"
+        "url": "git://github.com/brona-ruzicka/malformed-osc.js.git"
     },
-    "bugs": "https://github.com/colinbdclark/osc.js/issues",
+    "bugs": "https://github.com/brona-ruzicka/malformed-osc.js/issues",
     "license": "(MIT OR GPL-2.0)",
     "keywords": [
         "Open Sound Control",

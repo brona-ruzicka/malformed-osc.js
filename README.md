@@ -1,5 +1,12 @@
+malformed-osc.js
+================
+
+This is a fork of the [osc.js library](https://github.com/colinbdclark/osc.js).
+
+Now follows the original documentation of osc.js.
+
 osc.js
-======
+------
 
 osc.js is a library for reading and writing [Open Sound Control](http://opensoundcontrol.org) messages in JavaScript. It works in both Node.js and in a web browser.
 
