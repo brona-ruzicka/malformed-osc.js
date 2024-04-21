@@ -1,4 +1,4 @@
-/*! osc.js 2.4.4, Copyright 2023 Colin Clark | github.com/colinbdclark/osc.js */
+/*! osc.js 2.4.4, Copyright 2024 Colin Clark | github.com/colinbdclark/osc.js */
 
 (function (root, factory) {
     if (typeof exports === "object") {
@@ -38,7 +38,8 @@ var osc = osc || {};
 
     osc.defaults = {
         metadata: false,
-        unpackSingleArgs: true
+        unpackSingleArgs: false,
+        ignoreMissingAdressSlash: false,
     };
 
     // Unsupported, non-API property.
@@ -828,7 +829,7 @@ var osc = osc || {};
      * @return {Object} the OSC message, formatted as a JavaScript object containing "address" and "args" properties
      */
     osc.readMessage = function (data, options, offsetState) {
-        options = options || osc.defaults;
+        options = Object.assign({}, osc.defaults, options);
 
         var dv = osc.dataView(data, data.byteOffset, data.byteLength);
         offsetState = offsetState || {
@@ -841,7 +842,7 @@ var osc = osc || {};
 
     // Unsupported, non-API function.
     osc.readMessageContents = function (address, dv, options, offsetState) {
-        if (address.indexOf("/") !== 0) {
+        if (address.indexOf("/") !== 0 && !options.ignoreMissingAdressSlash) {
             throw new Error("A malformed OSC address was found while reading " +
                 "an OSC message. String was: " + address);
         }
@@ -873,7 +874,7 @@ var osc = osc || {};
      * @return {Uint8Array} an array of bytes containing the OSC message
      */
     osc.writeMessage = function (msg, options) {
-        options = options || osc.defaults;
+        options = Object.assign({}, osc.defaults, options);
 
         if (!osc.isValidMessage(msg)) {
             throw new Error("An OSC message must contain a valid address. Message was: " +
@@ -936,7 +937,7 @@ var osc = osc || {};
                 "Bundle was: " + JSON.stringify(bundle, null, 2));
         }
 
-        options = options || osc.defaults;
+        options = Object.assign({}, osc.defaults, options);
         var bundleCollection = osc.collectBundlePackets(bundle, options);
 
         return osc.joinParts(bundleCollection);
@@ -985,7 +986,7 @@ var osc = osc || {};
 
         if (firstChar === "#") {
             return osc.readBundleContents(dv, options, offsetState, len);
-        } else if (firstChar === "/") {
+        } else if (firstChar === "/" || options.ignoreMissingAdressSlash) {
             return osc.readMessageContents(header, dv, options, offsetState);
         }
 
@@ -1182,7 +1183,7 @@ var osc = osc || require("./osc.js"),
     };
 
     osc.Port = function (options) {
-        this.options = options || {};
+        this.options = Object.assign({}, osc.defaults, options);
         this.on("data", this.decodeOSC.bind(this));
     };
 
@@ -1229,8 +1230,7 @@ var osc = osc || require("./osc.js"),
 
     osc.SLIPPort = function (options) {
         var that = this;
-        var o = this.options = options || {};
-        o.useSLIP = o.useSLIP === undefined ? true : o.useSLIP;
+        var o = this.options = Object.assign({}, { useSLIP: true }, osc.defaults, options);
 
         this.decoder = new slip.Decoder({
             onMessage: this.decodeOSC.bind(this),
@@ -1313,7 +1313,7 @@ var osc = osc || require("./osc.js"),
      * @param {Object} options the configuration options for this relay
      */
     osc.Relay = function (port1, port2, options) {
-        var o = this.options = options || {};
+        var o = this.options = Object.assign({}, osc.defaults, options);
         o.raw = false;
 
         this.port1 = port1;

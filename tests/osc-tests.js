@@ -207,7 +207,7 @@ var fluid = fluid || require("infusion"),
     oscjsTests.strings.testEncodedObjectArgument = function (objectArg, argEncoder, argDecoder) {
         var msg = {
             address: "/thecat",
-            args: argEncoder(objectArg)
+            args: [ argEncoder(objectArg) ]
         };
 
         var encoded = osc.writeMessage(msg),
@@ -215,7 +215,7 @@ var fluid = fluid || require("infusion"),
 
         QUnit.deepEqual(decoded, msg,
             "The stringified object should have been correctly decoded.");
-        QUnit.deepEqual(argDecoder(decoded.args), objectArg,
+        QUnit.deepEqual(argDecoder(decoded.args[0]), objectArg,
             "The object should parse correctly.");
     };
 
@@ -277,7 +277,7 @@ var fluid = fluid || require("infusion"),
 
         var msg = {
             address: "/test",
-            args: "éé"
+            args: [ "éé" ],
         };
 
         var encoded = osc.writeMessage(msg),
@@ -1144,7 +1144,7 @@ var fluid = fluid || require("infusion"),
 
             message: {
                 address: "/oscillator/4/frequency",
-                args: 440
+                args: [ 440 ]
             }
         },
         {

@@ -44,7 +44,7 @@ var osc = osc || require("./osc.js"),
     };
 
     osc.Port = function (options) {
-        this.options = options || {};
+        this.options = Object.assign({}, osc.defaults, options);
         this.on("data", this.decodeOSC.bind(this));
     };
 
@@ -91,8 +91,7 @@ var osc = osc || require("./osc.js"),
 
     osc.SLIPPort = function (options) {
         var that = this;
-        var o = this.options = options || {};
-        o.useSLIP = o.useSLIP === undefined ? true : o.useSLIP;
+        var o = this.options = Object.assign({}, { useSLIP: true }, osc.defaults, options);
 
         this.decoder = new slip.Decoder({
             onMessage: this.decodeOSC.bind(this),
@@ -175,7 +174,7 @@ var osc = osc || require("./osc.js"),
      * @param {Object} options the configuration options for this relay
      */
     osc.Relay = function (port1, port2, options) {
-        var o = this.options = options || {};
+        var o = this.options = Object.assign({}, osc.defaults, options);
         o.raw = false;
 
         this.port1 = port1;
