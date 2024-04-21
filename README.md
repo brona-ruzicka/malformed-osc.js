@@ -3,9 +3,9 @@ malformed-osc.js
 
 This is a fork of the [osc.js library](https://github.com/colinbdclark/osc.js).
 
-It adds the ability to accept malformed messages without errors. Specifically by using the `ignoreMissingAdressSlash: true` option when creating a `Port` object, all packets that are [ambiguous](https://github.com/colinbdclark/osc.js/issues/72#issuecomment-269883882) are to be parsed as a message.
+It adds the ability to accept malformed messages without errors. Specifically by using the `ignoreMissingAdressSlash: true` option when creating a `Port` object, all packets that are [ambiguous](https://github.com/colinbdclark/osc.js/issues/72#issuecomment-269883882) will as a message.
 
-Additionally it modifies when the port option default to `osc.defaults` to match the official documentation (bugfix).
+Additionally it modifies when the port option defaults to the `osc.defaults` to match the official documentation (bugfix).
 
 *Now follows the amended original documentation of osc.js.*
 
