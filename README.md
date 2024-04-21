@@ -1,5 +1,12 @@
+malformed-osc.js
+================
+
+This is a fork of the [osc.js library](https://github.com/colinbdclark/osc.js).
+
+Now follows the original documentation of osc.js.
+
 osc.js
-======
+------
 
 osc.js is a library for reading and writing [Open Sound Control](http://opensoundcontrol.org) messages in JavaScript. It works in both Node.js and in a web browser.
 
@@ -729,7 +736,7 @@ There are two primary functions in osc.js used to read and write OSC data:
 Many osc.js functions take an <code>options</code> object that can be used to customize its behaviour. These options are also supported by all <code>osc.Port</code> objects, and can be included as a parameter in the <code>options</code> arguments passed to any <code>Port</code> constructor. The supported fields in an options object are:
 
 * <code>metadata</code>: specifies if the OSC type metadata should be included. By default, type metadata isn't included when reading packets, and is inferred automatically when writing packets. If you need greater precision in regards to the arguments in an OSC message, set the <code>metadata</code> argument to true. Defaults to <code>false</code>.
-* <code>unpackSingleArgs</code>: specifies if osc.js should automatically unpack single-argument messages so that their <code>args</code> property isn't wrapped in an array. Defaults to <code>true</code>.
+* <code>unpackSingleArgs</code>: specifies if osc.js should automatically unpack single-argument messages so that their <code>args</code> property isn't wrapped in an array. Defaults to <code>false</code>.
 
 
 Mapping OSC to JS
