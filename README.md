@@ -7,6 +7,8 @@ It adds the ability to accept malformed messages without errors. Specifically by
 
 Additionally it modifies when the port option defaults to the `osc.defaults` to match the official documentation (bugfix).
 
+This fork is may be installed from npm as `$ npm install malformed-osc`.
+
 *Now follows the amended original documentation of osc.js.*
 
 osc.js
@@ -77,7 +79,7 @@ For an npm-based project that depends on osc.js, you'll need a <code>package.jso
         "name": "<your project name>",
         "version": "<your project version>",
         "dependencies": {
-            "osc": "2.4.1"
+            "malformed-osc": "2.4.4"
         }
     }
 
